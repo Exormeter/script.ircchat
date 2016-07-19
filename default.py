@@ -8,6 +8,7 @@ import ctypes
 import time
 import xbmcgui
 import xbmcaddon
+import random
 
 addon = xbmcaddon.Addon()
 addon_id = addon.getAddonInfo('id')
@@ -15,18 +16,26 @@ addon_version = addon.getAddonInfo('version')
 language = addon.getLocalizedString
 addon_path = xbmc.translatePath(addon.getAddonInfo('path'))
 icon = os.path.join(addon_path, 'icon.png')
+emote_path = os.path.join(addon_path, "resources", "skins", "Default", "emotes")
 chat_queue = Queue.Queue(maxsize=0)
 client_queue = Queue.Queue(maxsize=0)
 action_previous_menu = (9, 10, 92, 216, 247, 257, 275, 61467, 61448)
-
 
 class irc_client(threading.Thread):
     def __init__(self):
         threading.Thread.__init__(self)
         self.chat_messages = ''
         self.name_list = []
+        self.emotes = self.get_installed_emotes()
+        self.colors = ['burlywood', 'azure', 'lightsteelblue', 'skyblue', 'deepskyblue',
+    				'yellowgreen', 'springgreen', 'fuchsia', 'darkviolet', 'darkturquoise',
+    				 'cyan', 'palegreen', 'mediumaquamarine', 'khaki', 'lightyellow', 'lavender'
+    				 'pink', 'magenta', 'thistle', 'peachpuff', 'salmon', 'crimson', 'sienna', 'red',
+    				 'teal', 'aqua', 'lime', 'olive']
+
 
     def run(self):
+    	refresh = addon.getSetting('chatrefresh')
         self.window = xbmcgui.Window(xbmcgui.getCurrentWindowDialogId())
         client_do = 'client_wait'
         self.window.setProperty('clientIsRunning', 'True')
@@ -46,12 +55,44 @@ class irc_client(threading.Thread):
                     msg = self.get_message()
                     if msg:
                         # adjust the chatmessage delay here
-                        time.sleep(1.0)
+                        time.sleep(float(refresh))
                     else:
                         time.sleep(0.2)
             else:
                 break
         return
+    
+     def get_installed_emotes(self):
+		emotes = []
+		for emote in os.listdir(emote_path):
+			emote_name = emote.split(".")[0]
+			emotes.append(emote_name)
+		return emotes
+		
+	def replace_emotes(self, message):
+    	emote_set = set(self.emotes)
+    	item = xbmcgui.ListItem()
+    	words = message.split()
+		if words[0] in emote_set:
+			index = 0
+			for word in words:
+				if word in emote_set:
+					item.setProperty("emote" + str(index), os.path.join(emote_path, word + '.png'))
+				else:
+					item.setProperty("emote_label", message.split(words[0])[1])
+					break
+				index = index + 1
+		else:
+			return xbmcgui.ListItem(label=message)
+        	return item
+    
+    
+    def coloring_names(self, name):
+    	random.seed()
+    	item = xbmcgui.ListItem()
+    	item.setProperty("name", name)
+    	item.setProperty("namecolor", random.choice(self.colors))
+    	return item
 
     def check_queue(self):
         # check for messages added to the chat_queue
@@ -171,7 +212,7 @@ class irc_client(threading.Thread):
 
     def update_chat(self, message):
         control = self.window.getControl(1331)
-        control.addItem(xbmcgui.ListItem(label2=message[0]))
+        control.addItem(self.coloring_names(message[0]))
         new_message = []
         words = message[1].split()
         new_line = ''
@@ -190,7 +231,7 @@ class irc_client(threading.Thread):
         if len(new_line.strip()) > 0:
             new_message.append(new_line.strip())
         for i in new_message:
-            control.addItem(xbmcgui.ListItem(label=i))
+            control.addItem(self.replace_emotes(i))
         c_size = control.size()
         control.selectItem(c_size-1)
         xbmc.executebuiltin("Control.move(1331, %s)" %c_size)

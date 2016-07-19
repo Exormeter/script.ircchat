@@ -404,19 +404,16 @@
 				<pagecontrol>60</pagecontrol>
 				<scrolltime tween="cubic" easing="out">600</scrolltime>
 				<orientation>vertical</orientation>
-									
-				<itemlayout height="25" width="350">
-					
-					<control type="label">
+			<itemlayout height="32" width="350">
+				<control type="label">
 						<posx>10</posx>
 						<posy>0</posy>
 						<width min="350" max="9999">auto</width>
 						<height>20</height>
 						<font>font13</font>
-						<textcolor>white</textcolor>
 						<aligny>center</aligny>
 						<align>left</align>
-						<label>[B]$INFO[ListItem.Label2][/B]</label>
+						<label>[B][COLOR=$INFO[ListItem.Property(namecolor)]]$INFO[ListItem.Property(name)][/COLOR][/B]</label>
 						<scroll>false</scroll>
 					</control>
 					<control type="label">
@@ -429,11 +426,85 @@
 						<aligny>center</aligny>
 						<align>left</align>
 						<label>$INFO[ListItem.Label]</label>
+						<scroll>false</scroll>
+					</control>
+					<control type="label">
+						<posx>10</posx>
+						<posy>0</posy>
+						<width>350</width>
+						<height>20</height>
+						<font>fontContextMenu</font>
+						<textcolor>white</textcolor>
+						<aligny>center</aligny>
+						<align>left</align>
+						<label>$INFO[ListItem.Label]</label>
+						<scroll>false</scroll>
+					</control>
+					<control type="label">
+						<posx>50</posx>
+						<posy>0</posy>
+						<width>350</width>
+						<height>20</height>
+						<font>fontContextMenu</font>
+						<textcolor>white</textcolor>
+						<aligny>center</aligny>
+						<align>left</align>
+						<label>$INFO[ListItem.Property(emote_label)]</label>
+						<scroll>false</scroll>
+					</control>
+					<control type="image">
+						<posx>10</posx>
+						<posy>0</posy>
+						<width>32</width>
+						<height>32</height>
+						<aligny>center</aligny>
+						<align>left</align>
+						<texture>$INFO[ListItem.Property(emote0)]</texture>
+						<scroll>false</scroll>
+					</control>
+					<control type="image">
+						<posx>50</posx>
+						<posy>0</posy>
+						<width>32</width>
+						<height>32</height>
+						<aligny>center</aligny>
+						<align>left</align>
+						<texture>$INFO[ListItem.Property(emote1)]</texture>
+						<scroll>false</scroll>
+					</control>
+					<control type="image">
+						<posx>90</posx>
+						<posy>0</posy>
+						<width>32</width>
+						<height>32</height>
+						<aligny>center</aligny>
+						<align>left</align>
+						<texture>$INFO[ListItem.Property(emote2)]</texture>
+						<scroll>false</scroll>
+					</control>
+					<control type="image">
+						<posx>130</posx>
+						<posy>0</posy>
+						<width>32</width>
+						<height>32</height>
+						<aligny>center</aligny>
+						<align>left</align>
+						<texture>$INFO[ListItem.Property(emote3)]</texture>
+						<scroll>false</scroll>
+					</control>
+					<control type="image">
+						<posx>170</posx>
+						<posy>0</posy>
+						<width>32</width>
+						<height>32</height>
+						<aligny>center</aligny>
+						<align>left</align>
+						<texture>$INFO[ListItem.Property(emote4)]</texture>
 						<scroll>false</scroll>
 					</control>
 					
 				</itemlayout>
-				<focusedlayout height="25" width="350">
+				<focusedlayout height="32" width="350">
 					
 					<control type="label">
 						<posx>10</posx>
@@ -441,10 +512,9 @@
 						<width>350</width>
 						<height>20</height>
 						<font>font13</font>
-						<textcolor>white</textcolor>
 						<aligny>center</aligny>
 						<align>left</align>
-						<label>[B]$INFO[ListItem.Label2][/B]</label>
+						<label>[B][COLOR=$INFO[ListItem.Property(namecolor)]]$INFO[ListItem.Property(name)][/COLOR][/B]</label>
 						<scroll>false</scroll>
 					</control>
 					<control type="label">
@@ -459,8 +529,70 @@
 						<label>$INFO[ListItem.Label]</label>
 						<scroll>false</scroll>
 					</control>
-				
-				</focusedlayout>
+					<control type="label">
+						<posx>50</posx>
+						<posy>0</posy>
+						<width>350</width>
+						<height>20</height>
+						<font>fontContextMenu</font>
+						<textcolor>white</textcolor>
+						<aligny>center</aligny>
+						<align>left</align>
+						<label>$INFO[ListItem.Property(emote_label)]</label>
+						<scroll>false</scroll>
+					</control>
+					<control type="image">
+						<posx>10</posx>
+						<posy>0</posy>
+						<width>32</width>
+						<height>32</height>
+						<aligny>center</aligny>
+						<align>left</align>
+						<texture>$INFO[ListItem.Property(emote0)]</texture>
+						<scroll>false</scroll>
+					</control>
+					<control type="image">
+						<posx>50</posx>
+						<posy>0</posy>
+						<width>32</width>
+						<height>32</height>
+						<aligny>center</aligny>
+						<align>left</align>
+						<texture>$INFO[ListItem.Property(emote1)]</texture>
+						<scroll>false</scroll>
+					</control>
+					<control type="image">
+						<posx>90</posx>
+						<posy>0</posy>
+						<width>32</width>
+						<height>32</height>
+						<aligny>center</aligny>
+						<align>left</align>
+						<texture>$INFO[ListItem.Property(emote2)]</texture>
+						<scroll>false</scroll>
+					</control>
+					<control type="image">
+						<posx>130</posx>
+						<posy>0</posy>
+						<width>32</width>
+						<height>32</height>
+						<aligny>center</aligny>
+						<align>left</align>
+						<texture>$INFO[ListItem.Property(emote3)]</texture>
+						<scroll>false</scroll>
+					</control>
+					<control type="image">
+						<posx>170</posx>
+						<posy>0</posy>
+						<width>32</width>
+						<height>32</height>
+						<aligny>center</aligny>
+						<align>left</align>
+						<texture>$INFO[ListItem.Property(emote4)]</texture>
+						<scroll>false</scroll>
+					</control>
+				</focusedlayout>						
+			
 					
 			</control>
 			
@@ -539,7 +671,7 @@
 				<aspectratio>stretch</aspectratio>
 				<texture border="20">IrcChat/ChatListbg.png</texture>
 			</control>
-			<control type="image"><!----double texture, animation fails to reach 100% visible--->
+			<control type="image">
 				<posx>510</posx>
 				<posy>300</posy>
 				<width>260</width>

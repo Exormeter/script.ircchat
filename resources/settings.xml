@@ -8,4 +8,5 @@
   <setting id="hostname" type="text" label="32012" default="Unknown" />
   <setting id="servername" type="text" label="32013" default="Server" />
   <setting id="port" type="text" label="32014" default="6667"/>
+  <setting id="chatrefresh" type="slider" label="Chat Refresh" default="0.5" range="0.1,0.1,1" option="float" />
 </settings>
